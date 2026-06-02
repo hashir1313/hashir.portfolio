@@ -1,17 +1,34 @@
-export const about = {
+export interface AboutData {
+    name: string;
+    role: string;
+    about: string;
+    email: string;
+}
+
+export const about: AboutData = {
     name: "Your Name",
     role: "Your Profession",
     about: "A minimal, clean portfolio template built with Next.js. Perfect for developers who want a simple yet professional online presence without the complexity.",
     email: "your.email@example.com",
 };
 
-export const seo = {
+export interface SeoData {
+    title: string;
+    description: string;
+    keywords: string;
+}
+
+export const seo: SeoData = {
     title: `${about.name} | ${about.role}`,
     description: "Minimal, clean Next.js portfolio template for developers seeking a simple, professional online presence without extra complexity.",
     keywords: "portfolio, web developer, Next.js, developer portfolio, minimal portfolio",
 }
 
-export const forms = {
+export interface FormsData {
+    formspreeUrl: string;
+}
+
+export const forms: FormsData = {
     formspreeUrl: "https://formspree.io/f/<url>",
 }
 

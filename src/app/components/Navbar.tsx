@@ -27,7 +27,7 @@ export default function Navbar() {
         }
     }, []);
 
-    const handleThemeChange = (checked) => {
+    const handleThemeChange = (checked: boolean) => {
         const newTheme = checked ? "dark" : "light";
         setIsDark(checked);
         document.documentElement.setAttribute("data-theme", newTheme);

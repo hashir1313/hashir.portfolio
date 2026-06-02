@@ -1,3 +1,4 @@
+import React from "react";
 import { socials } from "@/data/data";
 import { about } from "@/data/data";
 

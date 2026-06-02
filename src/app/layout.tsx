@@ -12,7 +12,11 @@ export const metadata = {
     keywords: `${seo.keywords}`,
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
     return (
         <html lang="en" data-theme="light" data-scroll-behavior="smooth">
             <head>
