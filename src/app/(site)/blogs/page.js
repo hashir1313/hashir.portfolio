@@ -1,12 +1,17 @@
 import React from "react";
-import { blogs , seo } from "../../data/data";
+import { blogs , seo } from "@/data/data";
 import Link from "next/link";
+import { getProfile } from "@/sanity/queries";
 
-export const metadata = {
-    title: `Blogs | ${seo.title}`,
-    description: "Read articles, tutorials, and insights on web development, Next.js, and programming.",
-    keywords: "blog, web development, Next.js, programming, tutorials"
-};
+export async function generateMetadata() {
+    const profile = await getProfile();
+    const seoTitle = profile ? `${profile.name} | ${profile.role}` : seo.title;
+    return {
+        title: `Blogs | ${seoTitle}`,
+        description: "Read articles, tutorials, and insights on web development, Next.js, and programming.",
+        keywords: "blog, web development, Next.js, programming, tutorials"
+    };
+}
 
 function page() {
     return (

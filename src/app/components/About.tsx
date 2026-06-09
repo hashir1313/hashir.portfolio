@@ -1,6 +1,11 @@
-import { about } from "../../data/data";
+import { about as fallbackAbout } from "../../data/data";
+import { getProfile } from "@/sanity/queries";
 
-export default function About() {
+export default async function About() {
+    const profile = await getProfile();
+    const aboutText = profile?.about || fallbackAbout.about;
+    const email = profile?.email || fallbackAbout.email;
+
     return (
         <>
             <div className="flex flex-col gap-2 mt-10 scroll-mt-14" id="about">
@@ -9,13 +14,13 @@ export default function About() {
                 </h2>
                 <div className="flex gap-2 flex-col">
                     <p className="text-base text-base-content/80">
-                        {about.about}
+                        {aboutText}
                     </p>
                     <p className="text-base text-base-content/80">
                         If you’ve got any questions or just feel like chatting,
                         send me an{" "}
                         <a
-                            href={`mailto:${about.email}`}
+                            href={`mailto:${email}`}
                             className="font-bold hover:underline cursor-pointer"
                         >
                             (Email)

@@ -37,5 +37,6 @@ export const project = defineType({
         },
       ],
     }),
+    defineField({ name: "pinned", type: "boolean", title: "Pinned", initialValue: false }),
   ],
 });

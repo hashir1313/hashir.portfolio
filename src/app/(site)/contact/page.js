@@ -1,11 +1,16 @@
 import React from "react";
 import { forms , seo } from "@/data/data";
+import { getProfile } from "@/sanity/queries";
 
-export const metadata = {
-    title: `Contact Me | ${seo.title}`,
-    description: "Get in touch with me to discuss projects, collaborations, or just to say hello.",
-    keywords: "contact, get in touch, collaboration, email, message, web developer"
-};
+export async function generateMetadata() {
+    const profile = await getProfile();
+    const seoTitle = profile ? `${profile.name} | ${profile.role}` : seo.title;
+    return {
+        title: `Contact Me | ${seoTitle}`,
+        description: "Get in touch with me to discuss projects, collaborations, or just to say hello.",
+        keywords: "contact, get in touch, collaboration, email, message, web developer"
+    };
+}
 
 function Contact() {
     return (

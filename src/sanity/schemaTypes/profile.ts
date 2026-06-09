@@ -19,11 +19,36 @@ export const profile = defineType({
           type: "object",
           fields: [
             { type: "string", name: "skill", title: "Skill" },
-            { name: 'icon', type: 'iconPicker', title: 'Icon' },
+            {
+              name: "iconSource",
+              type: "string",
+              title: "Icon Source",
+              options: {
+                list: [
+                  { title: "Icon Picker", value: "picker" },
+                  { title: "Custom Upload (SVG/Image)", value: "upload" },
+                ],
+              },
+              initialValue: "picker",
+            },
+            { 
+              name: 'icon', 
+              type: 'iconPicker', 
+              title: 'Icon Picker',
+              options: {
+                storeSvg: true
+              },
+              hidden: ({ parent }) => parent?.iconSource === "upload",
+            },
+            {
+              name: 'customIcon',
+              type: 'image',
+              title: 'Custom Icon Upload',
+              hidden: ({ parent }) => parent?.iconSource !== "upload",
+            },
           ],
         },
       ],
     }),
-    defineField({ name: 'pined', type: 'boolean', title: 'Pined' }),
   ],
 });

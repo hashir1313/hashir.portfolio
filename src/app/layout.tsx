@@ -1,16 +1,28 @@
 import "./globals.css";
-import Navbar from "./components/Navbar";
 import { seo } from "@/data/data";
-import Footer from "./components/Footer";
+import { getProfile } from "@/sanity/queries";
 
-export const metadata = {
-    title: `${seo.title}`,
-    icons: {
-        icon: [{ url: "/favicon.ico" }],
-    },
-    description: `${seo.description}`,
-    keywords: `${seo.keywords}`,
-};
+export async function generateMetadata() {
+    const profile = await getProfile();
+    if (profile) {
+        return {
+            title: `${profile.name} | ${profile.role}`,
+            icons: {
+                icon: [{ url: "/favicon.ico" }],
+            },
+            description: profile.about || seo.description,
+            keywords: seo.keywords,
+        };
+    }
+    return {
+        title: `${seo.title}`,
+        icons: {
+            icon: [{ url: "/favicon.ico" }],
+        },
+        description: `${seo.description}`,
+        keywords: `${seo.keywords}`,
+    };
+}
 
 export default function RootLayout({
   children,
@@ -31,11 +43,7 @@ export default function RootLayout({
                 ></link>
             </head>
             <body className={`antialiased overflow-auto`}>
-                <div className="w-[100%] md:w-[700px] m-auto">
-                    <Navbar />
-                    {children}
-                    <Footer />
-                </div>
+                {children}
             </body>
         </html>
     );

@@ -80,12 +80,12 @@ export default function Navbar() {
                                 </li>
                             </ul>
 
-                            <Link
+                            {/* <Link
                                 href="/blogs"
                                 className="hover:underline hidden sm:block"
                             >
                                 Blogs
-                            </Link>
+                            </Link> */}
 
                             <Link
                                 href={blogs ? "/" : "/blogs"}
