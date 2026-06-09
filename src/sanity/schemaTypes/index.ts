@@ -3,13 +3,15 @@ import { profile } from './profile';
 import { socials } from './socials';
 import { project } from './project';
 import { experience } from './experience';
+import { contactSubmission } from './contactSubmission';
 
 // Combined all schemas into a single source of truth
 export const schemaTypes = [
   profile, 
   socials,
   project,
-  experience
+  experience,
+  contactSubmission
 ];
 
 // If your sanity.config.ts uses 'schema', keep this too, but point to the new array
