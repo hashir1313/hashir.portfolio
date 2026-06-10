@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import React from "react";
 import { seo } from "@/data/data";
 import { getProfile } from "@/sanity/queries";

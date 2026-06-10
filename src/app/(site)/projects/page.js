@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import React from "react";
 import { projects as fallbackProjects, seo } from "@/data/data";
 import { getProfile, getProjects } from "@/sanity/queries";

@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import ProjectsList from "../components/ProjectsList";
 import TechLists from "../components/TechLists";
 import About from "../components/About";
