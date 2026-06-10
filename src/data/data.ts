@@ -117,21 +117,3 @@ export const experience = [
         date: "01/09/2022",
     },
 ];
-
-export const blogs = [
-    {
-        title: "Understanding React Hooks",
-        date: "12/03/2025",
-        link: "#",
-    },
-    {
-        title: "CSS Grid vs Flexbox: When to Use Which",
-        date: "25/12/2024",
-        link: "#",
-    },
-    {
-        title: "Next.js SEO Best Practices",
-        date: "10/07/2024",
-        link: "#",
-    },
-];
