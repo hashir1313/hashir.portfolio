@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 import { createClient } from "next-sanity";
 
 const writeClient = createClient({
@@ -32,38 +31,27 @@ export async function POST(request: NextRequest) {
         return err;
       });
 
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      secure: process.env.SMTP_SECURE === "true",
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-      connectionTimeout: 30000,
-    });
-
-    const emailError = await transporter
-      .sendMail({
-        from: process.env.SMTP_FROM || process.env.SMTP_USER,
-        to: process.env.NOTIFICATION_EMAIL,
-        subject: `New contact from ${name}`,
-        text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
-        html: `
-          <h3>New Contact Submission</h3>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong></p>
-          <p>${message}</p>
-        `,
+    const web3FormsError = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        access_key: process.env.WEB3FORMS_ACCESS_KEY,
+        name,
+        email,
+        message,
+      }),
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        if (!data.success) throw new Error(data.message || "Web3Forms submission failed");
+        return null;
       })
-      .then(() => null)
       .catch((err) => {
-        console.error("Email send failed:", err);
+        console.error("Web3Forms send failed:", err);
         return err;
       });
 
-    if (sanityError && emailError) {
+    if (sanityError && web3FormsError) {
       return NextResponse.json(
         { error: "Failed to save and send email" },
         { status: 500 }
