@@ -17,50 +17,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "All fields are required" }, { status: 400 });
     }
 
-    const sanityError = await writeClient
-      .create({
-        _type: "contactSubmission",
-        name,
-        email,
-        message,
-        read: false,
-      })
-      .then(() => null)
-      .catch((err) => {
-        console.error("Sanity save failed:", err);
-        return err;
-      });
-
-    const web3FormsError = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        access_key: process.env.WEB3FORMS_ACCESS_KEY,
-        name,
-        email,
-        message,
-      }),
-    })
-      .then(async (res) => {
-        const data = await res.json();
-        if (!data.success) throw new Error(data.message || "Web3Forms submission failed");
-        return null;
-      })
-      .catch((err) => {
-        console.error("Web3Forms send failed:", err);
-        return err;
-      });
-
-    if (sanityError && web3FormsError) {
-      return NextResponse.json(
-        { error: "Failed to save and send email" },
-        { status: 500 }
-      );
-    }
+    await writeClient.create({
+      _type: "contactSubmission",
+      name,
+      email,
+      message,
+      read: false,
+    });
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
-    console.error("Contact form error:", error);
-    return NextResponse.json({ error: "Failed to process submission" }, { status: 500 });
+    console.error("Sanity save failed:", error);
+    return NextResponse.json({ error: "Failed to save submission" }, { status: 500 });
   }
 }
