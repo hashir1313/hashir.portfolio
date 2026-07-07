@@ -46,7 +46,7 @@ export default async function Profile() {
             <div className="mt-1.5 flex items-center gap-1">
                 <p className="text-base text-base-content/60">{role} // </p>
                 <p className=" text-base-content/90">
-                    Solo
+                    Pakistan
                 </p>
             </div>
             <div className="flex items-center mt-3 gap-3">
