@@ -2,7 +2,7 @@ import { defineField, defineType } from "sanity";
 
 export const socials = defineType({
     name: "socials",
-    title: "Socials",
+    title: "Social Links",
     type: "document",
     fields: [
         defineField({ name: "github", type: "url", title: "Github" }),
@@ -11,4 +11,9 @@ export const socials = defineType({
         defineField({ name: "facebook", type: "url", title: "Facebook" }),
         defineField({ name: "discord", type: "url", title: "Discord" }),
     ],
+    preview: {
+        prepare() {
+            return { title: "Social Links" };
+        },
+    },
 })
