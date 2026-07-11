@@ -46,6 +46,7 @@ export const socials = {
     twitter: "",
     instagram: "",
     facebook: "",
+    discord: "",
 };
 
 export const projects = {

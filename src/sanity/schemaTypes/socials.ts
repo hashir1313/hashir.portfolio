@@ -9,5 +9,6 @@ export const socials = defineType({
         defineField({ name: "twitter", type: "url", title: "Twitter" }),
         defineField({ name: "instagram", type: "url", title: "Instagram" }),
         defineField({ name: "facebook", type: "url", title: "Facebook" }),
+        defineField({ name: "discord", type: "url", title: "Discord" }),
     ],
 })

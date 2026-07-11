@@ -25,6 +25,7 @@ export interface SocialsData {
   twitter?: string;
   instagram?: string;
   facebook?: string;
+  discord?: string;
 }
 
 export interface ProjectData {
